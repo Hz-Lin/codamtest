@@ -6,7 +6,7 @@
 /*   By: hlin <hlin@student.codam.nl>                 +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2020/11/02 22:07:26 by hlin          #+#    #+#                 */
-/*   Updated: 2020/11/02 22:54:47 by hlin          ########   odam.nl         */
+/*   Updated: 2020/11/04 10:28:57 by hlin          ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ static void	test_write(int fd, char *str, int len)
 static int	test_read(char *file, size_t len)
 {
 	int		fd;
-	char	buf1[51];
-	char	buf2[51];
+	char	buf1[100];
+	char	buf2[100];
 	int		res;
 
-	bzero(buf1, 51);
-	bzero(buf2, 51);
+	bzero(buf1, 100);
+	bzero(buf2, 100);
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
 		return (-1);
@@ -88,12 +88,12 @@ int			write_testing(void)
 
 void		read_testing(void)
 {
-	char	buf1[51];
-	char	buf2[51];
+	char	buf1[100];
+	char	buf2[100];
 	int		res;
 
-	bzero(buf1, 51);
-	bzero(buf2, 51);
+	bzero(buf1, 100);
+	bzero(buf2, 100);
 	printf("" YELLOW "====== testing read ======" RESET "\n");
 	res = read(42, buf1, 20);
 	printf("read:           %s\n", (*buf1 == '\0' ? "\\0" : buf1));
@@ -104,9 +104,9 @@ void		read_testing(void)
 	printf("ft_read return: %d\n", res);
 	printf("errno ft_read:  %d\n", errno);
 	errno = 0;
-	test_read("libasm.h", 20);
+	test_read("libasm.h", 10);
 	test_read("libasm.h", 0);
-	test_read("libasm.h", 30);
+	test_read("libasm.h", 50);
 	test_read("libasm.h", -7);
 	errno = 0;
 	test_read("invalidfile", 10);
